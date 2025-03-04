@@ -1,4 +1,4 @@
-FROM node:20 as build
+FROM node:20 AS build
 
 WORKDIR /usr/src/app
 
@@ -18,6 +18,8 @@ WORKDIR /usr/src/app
 
 COPY --from=build /usr/src/app/package.json ./package.json
 COPY --from=build /usr/src/app/dist ./dist
+COPY --from=build /usr/src/app/node_modules ./node_modules
+COPY --from=build /usr/src/app/prisma ./prisma
 COPY --from=build /usr/src/app/node_modules ./node_modules
 
 EXPOSE 3000
