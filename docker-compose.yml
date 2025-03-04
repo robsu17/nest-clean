@@ -13,3 +13,18 @@ services:
       PGDATA: /data/postgres
     volumes:
       - ./data/pg:/data/postgres
+  
+  api:
+    container_name: nest-clean-api
+    build: 
+      context: .
+    image: nest-clean
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      JWT_PRIVATE_KEY: ${JWT_PRIVATE_KEY}
+      JWT_PUBLIC_KEY: ${JWT_PUBLIC_KEY}
+      PORT: ${PORT}
+    depends_on:
+      - postgres
